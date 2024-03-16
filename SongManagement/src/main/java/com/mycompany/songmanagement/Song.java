@@ -4,18 +4,22 @@
  */
 package com.mycompany.songmanagement;
 
+import javax.swing.*;
+
 /**
  *
  * @author Student
  */
 public class Song {
-    private String author, singer, name, type, album, recodLabel;
+    private String author, singer, name, type, album, recodLabel,id, genre;
+    private ImageIcon image;
 
     public Song() {
         
     }
 
-    public Song(String author, String singer, String name, String type, String album, String recodLabel) {
+    public Song(String id,String author, String singer, String name, String type, String album, String recodLabel) {
+        this.id=id;
         this.author = author;
         this.singer = singer;
         this.name = name;
@@ -24,6 +28,22 @@ public class Song {
         this.recodLabel = recodLabel;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ImageIcon getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIcon image) {
+        this.image = image;
+    }
+    
     public String getAuthor() {
         return author;
     }

@@ -29,196 +29,415 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        list = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        SearchType = new javax.swing.JComboBox<>();
+        searchText = new javax.swing.JTextField();
+        SearchBuuton = new javax.swing.JButton();
+        song = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        author = new javax.swing.JLabel();
+        authorText = new javax.swing.JTextField();
+        singer = new javax.swing.JLabel();
+        manufacturer = new javax.swing.JLabel();
+        singerText = new javax.swing.JTextField();
+        manufacturerText = new javax.swing.JTextField();
+        year = new javax.swing.JLabel();
+        yearText = new javax.swing.JTextField();
+        image = new javax.swing.JLabel();
+        uploadImageButton = new javax.swing.JButton();
+        functions = new javax.swing.JPanel();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        setTitle("My Project");
+        setLocation(new java.awt.Point(0, 0));
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Song", "Author", "Singer", "Genre", "Album", "Release Year"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
 
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        list.setColumnSelectionAllowed(true);
+        list.setName(""); // NOI18N
+        jScrollPane2.setViewportView(list);
+        list.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\app Icon.png")); // NOI18N
+        jLabel1.setText("SONG MANAGEMENT");
+        jPanel1.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("Refresh");
+        jPanel3.add(jButton1);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(jPanel1);
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        SearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Song", "Author ", "Singer", "Manufaturer", "Years of Release", "Genre", "Album", " " }));
+        SearchType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                SearchTypeActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
-        jPanel2.add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 6, 10);
+        jPanel2.add(SearchType, gridBagConstraints);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        searchText.setMinimumSize(new java.awt.Dimension(150, 22));
+        searchText.setPreferredSize(new java.awt.Dimension(150, 22));
+        searchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchTextActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        jPanel2.add(jTextField1, gridBagConstraints);
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 5, 0);
+        jPanel2.add(searchText, gridBagConstraints);
 
-        jButton1.setText("Search");
+        SearchBuuton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SearchBuuton.setForeground(java.awt.Color.lightGray);
+        SearchBuuton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\search.png")); // NOI18N
+        SearchBuuton.setText("Search");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 0);
+        jPanel2.add(SearchBuuton, gridBagConstraints);
+
+        song.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        song.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        song.setText("Song: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel2.add(song, gridBagConstraints);
+
+        nameText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
+        jPanel2.add(nameText, gridBagConstraints);
+
+        author.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        author.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        author.setText("Author:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel2.add(author, gridBagConstraints);
+
+        authorText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
+        authorText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                authorTextActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
+        jPanel2.add(authorText, gridBagConstraints);
+
+        singer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        singer.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        singer.setText("Singer:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 0);
+        jPanel2.add(singer, gridBagConstraints);
+
+        manufacturer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        manufacturer.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        manufacturer.setText("Manufacturer:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel2.add(manufacturer, gridBagConstraints);
+
+        singerText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
+        singerText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singerTextActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
+        jPanel2.add(singerText, gridBagConstraints);
+
+        manufacturerText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 0);
+        jPanel2.add(manufacturerText, gridBagConstraints);
+
+        year.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        year.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        year.setText("Year of Release:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel2.add(year, gridBagConstraints);
+
+        yearText.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
+        jPanel2.add(yearText, gridBagConstraints);
+
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        image.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\music.png")); // NOI18N
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        image.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        image.setIconTextGap(1);
+        image.setMaximumSize(new java.awt.Dimension(125, 125));
+        image.setMinimumSize(new java.awt.Dimension(125, 125));
+        image.setName(""); // NOI18N
+        image.setPreferredSize(new java.awt.Dimension(125, 125));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 5, 10);
+        jPanel2.add(image, gridBagConstraints);
+
+        uploadImageButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        uploadImageButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\upload image.png")); // NOI18N
+        uploadImageButton.setText("Upload Image");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 20, 0);
+        jPanel2.add(uploadImageButton, gridBagConstraints);
+
+        functions.setMinimumSize(new java.awt.Dimension(100, 100));
+        functions.setPreferredSize(new java.awt.Dimension(100, 100));
+        functions.setLayout(new java.awt.GridBagLayout());
+
+        addButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\add.png")); // NOI18N
+        addButton.setText("Add");
+        addButton.setMaximumSize(new java.awt.Dimension(180, 136));
+        addButton.setMinimumSize(new java.awt.Dimension(80, 36));
+        addButton.setOpaque(true);
+        addButton.setPreferredSize(new java.awt.Dimension(80, 36));
+        addButton.setRequestFocusEnabled(false);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 7);
+        functions.add(addButton, gridBagConstraints);
+
+        editButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\edit.png")); // NOI18N
+        editButton.setText("Edit");
+        editButton.setMaximumSize(new java.awt.Dimension(84, 36));
+        editButton.setMinimumSize(new java.awt.Dimension(84, 36));
+        editButton.setPreferredSize(new java.awt.Dimension(84, 36));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 6);
+        functions.add(editButton, gridBagConstraints);
+
+        saveButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\save.png")); // NOI18N
+        saveButton.setText("Save");
+        saveButton.setMaximumSize(new java.awt.Dimension(88, 36));
+        saveButton.setMinimumSize(new java.awt.Dimension(88, 36));
+        saveButton.setPreferredSize(new java.awt.Dimension(88, 36));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        functions.add(saveButton, gridBagConstraints);
+
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deleteButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\delete.png")); // NOI18N
+        deleteButton.setText("Delete");
+        deleteButton.setMaximumSize(new java.awt.Dimension(98, 36));
+        deleteButton.setMinimumSize(new java.awt.Dimension(98, 36));
+        deleteButton.setPreferredSize(new java.awt.Dimension(98, 36));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        jPanel2.add(jButton1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        functions.add(deleteButton, gridBagConstraints);
 
-        jLabel2.setText("Name");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(functions, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jLabel2.setText("Album");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
         jPanel2.add(jLabel2, gridBagConstraints);
-
-        jTextField2.setText("jTextField2");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        jPanel2.add(jTextField2, gridBagConstraints);
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
+        jPanel2.add(jTextField1, gridBagConstraints);
 
-        jLabel3.setText("Author");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        jPanel2.add(jLabel3, gridBagConstraints);
-
-        jTextField3.setText("jTextField3");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        jPanel2.add(jTextField3, gridBagConstraints);
-
-        jLabel4.setText("Singer");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jPanel2.add(jLabel4, gridBagConstraints);
-
-        jLabel5.setText("Manufacturer");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        jPanel2.add(jLabel5, gridBagConstraints);
-
-        jTextField4.setText("jTextField4");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        jPanel2.add(jTextField4, gridBagConstraints);
-
-        jTextField5.setText("jTextField5");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        jPanel2.add(jTextField5, gridBagConstraints);
-
-        jLabel6.setText("jLabel6");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jLabel3.setText("Genre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        jPanel2.add(jLabel6, gridBagConstraints);
+        gridBagConstraints.gridwidth = 2;
+        jPanel2.add(jLabel3, gridBagConstraints);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jazz ", "Pop", "Rock ", "Folk ", "Classical", "Country", "EDM", "Classical ", "Rap", "Dance", "Blue ", "Opera", "Hip hop ", "R&B ", "Others" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 5);
+        jPanel2.add(jComboBox1, gridBagConstraints);
 
         getContentPane().add(jPanel2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchTextActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void SearchTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_SearchTypeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void singerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singerTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_singerTextActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-    }
+    private void authorTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authorTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_authorTextActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addButtonActionPerformed
+
+   //
+   //
+   //
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SearchBuuton;
+    private javax.swing.JComboBox<String> SearchType;
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel author;
+    private javax.swing.JTextField authorText;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JPanel functions;
+    private javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable list;
+    private javax.swing.JLabel manufacturer;
+    private javax.swing.JTextField manufacturerText;
+    private javax.swing.JTextField nameText;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField searchText;
+    private javax.swing.JLabel singer;
+    private javax.swing.JTextField singerText;
+    private javax.swing.JLabel song;
+    private javax.swing.JButton uploadImageButton;
+    private javax.swing.JLabel year;
+    private javax.swing.JTextField yearText;
     // End of variables declaration//GEN-END:variables
 }
