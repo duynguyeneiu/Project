@@ -20,20 +20,22 @@ import javax.swing.table.TableRowSorter;
 public class Main extends javax.swing.JFrame {
 
     private ArrayList<Song> list;
-    private ImageIcon crossIcon = new ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\cross mark.png");
-    private ImageIcon aceptIcon = new ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\accept mark.png");
-    private ImageIcon exclamationIcon = new ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\exclamation mark.png");
-    private ImageIcon questionIcon = new ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\question mark.png");
+    private ImageIcon crossIcon = new ImageIcon(getClass().getResource("/Icons/cross mark.png"));
+    private ImageIcon aceptIcon = new ImageIcon(getClass().getResource("/Icons/accept mark.png"));
+    private ImageIcon exclamationIcon = new ImageIcon(getClass().getResource("/Icons/exclamation mark.png"));
+    private ImageIcon questionIcon = new ImageIcon(getClass().getResource("/Icons/question mark.png"));
 
     public Main() {
         list = new ArrayList<>();
         loadFile();
         initComponents();
-        ImageIcon icon = new ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\frame icon.png");
-        setIconImage(icon.getImage());
+//        ClassLoader classloader= getClass().getClassLoader();
+//        URL iconUrl= classloader.getResource("Icons/frame icon.png");
+//        ImageIcon icon = new ImageIcon(iconUrl);
+//        setIconImage(icon.getImage());
         setLocationRelativeTo(null);
         addRowSorter();
-        fillTable(list);
+      //  fillTable(list);
 
     }
 
@@ -90,7 +92,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Project");
         setLocation(new java.awt.Point(0, 0));
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -122,7 +124,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(56, 132, 209));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\app Icon.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/app Icon.png"))); // NOI18N
         jLabel1.setText("SONG MANAGEMENT");
         jPanel1.add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
@@ -176,7 +178,7 @@ public class Main extends javax.swing.JFrame {
 
         SearchBuuton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         SearchBuuton.setForeground(java.awt.Color.lightGray);
-        SearchBuuton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\search.png")); // NOI18N
+        SearchBuuton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search.png"))); // NOI18N
         SearchBuuton.setText("Search");
         SearchBuuton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,7 +313,7 @@ public class Main extends javax.swing.JFrame {
         jPanel2.add(image, gridBagConstraints);
 
         uploadImageButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        uploadImageButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\upload image.png")); // NOI18N
+        uploadImageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/upload image.png"))); // NOI18N
         uploadImageButton.setText("Upload Image");
         uploadImageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,7 +333,7 @@ public class Main extends javax.swing.JFrame {
         functions.setLayout(new java.awt.GridBagLayout());
 
         addButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        addButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\add.png")); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
         addButton.setText("Add");
         addButton.setMaximumSize(new java.awt.Dimension(180, 136));
         addButton.setMinimumSize(new java.awt.Dimension(80, 36));
@@ -350,7 +352,7 @@ public class Main extends javax.swing.JFrame {
         functions.add(addButton, gridBagConstraints);
 
         editButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        editButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\edit.png")); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         editButton.setText("Edit");
         editButton.setMaximumSize(new java.awt.Dimension(84, 36));
         editButton.setMinimumSize(new java.awt.Dimension(84, 36));
@@ -367,7 +369,7 @@ public class Main extends javax.swing.JFrame {
         functions.add(editButton, gridBagConstraints);
 
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        saveButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\save.png")); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
         saveButton.setText("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(88, 36));
         saveButton.setMinimumSize(new java.awt.Dimension(88, 36));
@@ -384,7 +386,7 @@ public class Main extends javax.swing.JFrame {
         functions.add(saveButton, gridBagConstraints);
 
         deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        deleteButton.setIcon(new javax.swing.ImageIcon("D:\\CSE203_OOP\\Project\\SongManagement\\src\\main\\java\\com\\mycompany\\songmanagement\\Icons\\delete.png")); // NOI18N
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete.png"))); // NOI18N
         deleteButton.setText("Delete");
         deleteButton.setMaximumSize(new java.awt.Dimension(98, 36));
         deleteButton.setMinimumSize(new java.awt.Dimension(98, 36));
@@ -464,11 +466,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_authorTextActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        addSong();
+      //  addSong();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        fillTable(list);
+      //  fillTable(list);
         refreshText();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
@@ -478,148 +480,151 @@ public class Main extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         if (table.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a song to edit", "Message", 1, exclamationIcon);
+            JOptionPane.showMessageDialog(this, "Please select a song to edit", "Message", 1, new ImageIcon(getClass().getResource("/Icons/exclamation mark.png")));
         } else {
-            EditSongFrame edit = new EditSongFrame(list, table.getSelectedRow());
-            edit.setLocationRelativeTo(this);
-            edit.setVisible(true);
+//            EditSongFrame edit = new EditSongFrame(list, table.getSelectedRow());
+//            edit.setLocationRelativeTo(this);
+//            edit.setVisible(true);
         }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if (table.getSelectedRow() != -1) {
-            int option = JOptionPane.showConfirmDialog(this, "Do you want to delete the song: " + list.get(table.getSelectedRow()).getName(), "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, questionIcon);
-            if (option == JOptionPane.YES_OPTION) {
-                list.remove(table.getSelectedRow());
-
-            }
-        }
+//        if (table.getSelectedRow() != -1) {
+//            int option = JOptionPane.showConfirmDialog(this, "Do you want to delete the song: " + list.get(table.getSelectedRow()).getName(), "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, questionIcon);
+//            if (option == JOptionPane.YES_OPTION) {
+//                list.remove(table.getSelectedRow());
+//
+//            }
+//        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void SearchBuutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBuutonActionPerformed
-        search();
+      //  search();
     }//GEN-LAST:event_SearchBuutonActionPerformed
 
     private void uploadImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadImageButtonActionPerformed
         String filePath = "";
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif","png");
         chooser.setFileFilter(filter);
         int selectedFile = chooser.showOpenDialog(this);
         if (selectedFile == JFileChooser.APPROVE_OPTION) {
             filePath = chooser.getSelectedFile().getPath();
         }
+        
         ImageIcon icon = new ImageIcon(filePath);
         image.setIcon(icon);
+        
     }//GEN-LAST:event_uploadImageButtonActionPerformed
-    private void search() {
-        String searchType = SearchType.getSelectedItem().toString();
-        String key = searchText.getText();
-        ArrayList<Song> search = new ArrayList<>();
-        switch (searchType) {
-            case "Song":
-                for (Song song : list) {
-                    if (song.getName().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-            case "Author":
-                for (Song song : list) {
-                    if (song.getAuthor().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-            case "Singer":
-                for (Song song : list) {
-                    if (song.getSinger().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-            case "Manufacturer":
-                for (Song song : list) {
-                    if (song.getManufacturer().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-            case "Years of Release":
-                if (isNumber(key)) {
-                    for (Song song : list) {
-                        if (song.getYear() == 0) {
-                            search.add(song);
-                        }
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Invalid search content: " + key);
-                    searchText.requestFocus();
-                }
-                break;
-            case "Genre":
-                for (Song song : list) {
-                    if (song.getGenre().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-            case "Album":
-                for (Song song : list) {
-                    if (song.getAlbum().contains(key)) {
-                        search.add(song);
-                    }
-                }
-                break;
-        }
-        fillTable(search);
-    }
+//    private void search() {
+//        String searchType = SearchType.getSelectedItem().toString();
+//        String key = searchText.getText();
+//        ArrayList<Song> search = new ArrayList<>();
+//        switch (searchType) {
+//            case "Song":
+//                for (Song song : list) {
+//                    if (song.getName().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//            case "Author":
+//                for (Song song : list) {
+//                    if (song.getAuthor().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//            case "Singer":
+//                for (Song song : list) {
+//                    if (song.getSinger().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//            case "Manufacturer":
+//                for (Song song : list) {
+//                    if (song.getManufacturer().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//            case "Years of Release":
+//                if (isNumber(key)) {
+//                    for (Song song : list) {
+//                        if (song.getYear() == 0) {
+//                            search.add(song);
+//                        }
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Invalid search content: " + key);
+//                    searchText.requestFocus();
+//                }
+//                break;
+//            case "Genre":
+//                for (Song song : list) {
+//                    if (song.getGenre().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//            case "Album":
+//                for (Song song : list) {
+//                    if (song.getAlbum().contains(key)) {
+//                        search.add(song);
+//                    }
+//                }
+//                break;
+//        }
+//        fillTable(search);
+//    }
 
-    private void addSong() {
-        if (nameText.getText().isEmpty()) {
-            setBorderColor(nameText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Name of the song", "Message", 1, exclamationIcon);
-            nameText.requestFocus();
-        } else if (authorText.getText().isEmpty()) {
-            setBorderColor(authorText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Author's name", "Message", 1, exclamationIcon);
-            authorText.requestFocus();
-        } else if (singerText.getText().isEmpty()) {
-            setBorderColor(singerText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Singer's name", "Message", 1, exclamationIcon);
-            singerText.requestFocus();
-        } else if (manufacturerText.getText().isEmpty()) {
-            setBorderColor(manufacturerText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Manufacturer of the song", "Message", 1, exclamationIcon);
-            manufacturerText.requestFocus();
-        } else if (yearText.getText().isEmpty()) {
-            setBorderColor(yearText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Release year of the song", "Message", 1, exclamationIcon);
-            yearText.requestFocus();
-        } else if (albumText.getText().isEmpty()) {
-            setBorderColor(albumText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Album of the song", "Message", 1, exclamationIcon);
-            albumText.requestFocus();
-        } else if (!isNumber(yearText.getText())) {
-            setBorderColor(yearText, Color.red);
-            JOptionPane.showMessageDialog(this, "Invalid number: " + yearText.getText(), "Message", 1, exclamationIcon);
-            yearText.requestFocus();
-        } else {
-            String name = nameText.getText();
-            String author = authorText.getText();
-            String singer = singerText.getText();
-            String manufacturer = manufacturerText.getText();
-            int year = Integer.parseInt(yearText.getText());
-            String genre = genres.getSelectedItem().toString();
-            String album = albumText.getText();
-            Song song = new Song(name, author, singer, manufacturer, genre, album, year);
-            list.add(song);
-            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
-            refreshText();
-            fillTable(list);
-
-        }
-    }
+//    private void addSong() {
+//        
+//        if (nameText.getText().isEmpty()) {
+//            setBorderColor(nameText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Name of the song", "Message", 1, exclamationIcon);
+//            nameText.requestFocus();
+//        } else if (authorText.getText().isEmpty()) {
+//            setBorderColor(authorText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Author's name", "Message", 1, exclamationIcon);
+//            authorText.requestFocus();
+//        } else if (singerText.getText().isEmpty()) {
+//            setBorderColor(singerText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Singer's name", "Message", 1, exclamationIcon);
+//            singerText.requestFocus();
+//        } else if (manufacturerText.getText().isEmpty()) {
+//            setBorderColor(manufacturerText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Manufacturer of the song", "Message", 1, exclamationIcon);
+//            manufacturerText.requestFocus();
+//        } else if (yearText.getText().isEmpty()) {
+//            setBorderColor(yearText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Release year of the song", "Message", 1, exclamationIcon);
+//            yearText.requestFocus();
+//        } else if (albumText.getText().isEmpty()) {
+//            setBorderColor(albumText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Please enter Album of the song", "Message", 1, exclamationIcon);
+//            albumText.requestFocus();
+//        } else if (!isNumber(yearText.getText())) {
+//            setBorderColor(yearText, Color.red);
+//            JOptionPane.showMessageDialog(this, "Invalid number: " + yearText.getText(), "Message", 1, exclamationIcon);
+//            yearText.requestFocus();
+//        } else {
+//            String name = nameText.getText();
+//            String author = authorText.getText();
+//            String singer = singerText.getText();
+//            String manufacturer = manufacturerText.getText();
+//            int year = Integer.parseInt(yearText.getText());
+//            String genre = genres.getSelectedItem().toString();
+//            String album = albumText.getText();
+//            Song song = new Song(name, author, singer, manufacturer, genre, album, year);
+//            list.add(song);
+//            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+//            refreshText();
+//            fillTable(list);
+//
+//        }
+//    }
 
     private boolean isNumber(String a) {
         try {
@@ -651,19 +656,19 @@ public class Main extends javax.swing.JFrame {
         text.setBorder(bor);
     }
 
-    private void fillTable(ArrayList<Song> list) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int rowCount = table.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        for (Song song : list) {
-            Object[] row = new Object[]{song.getName(), song.getAuthor(), song.getSinger(), song.getGenre(), song.getAlbum(), song.getYear()};
-            model.addRow(row);
-        }
-        pack();
-
-    }
+//    private void fillTable(ArrayList<Song> list) {
+//        DefaultTableModel model = (DefaultTableModel) table.getModel();
+//        int rowCount = table.getRowCount();
+//        for (int i = rowCount - 1; i >= 0; i--) {
+//            model.removeRow(i);
+//        }
+//        for (Song song : list) {
+//            Object[] row = new Object[]{song.getName(), song.getAuthor(), song.getSinger(), song.getGenre(), song.getAlbum(), song.getYear()};
+//            model.addRow(row);
+//        }
+//        pack();
+//
+//    }
 
     private void addRowSorter() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();

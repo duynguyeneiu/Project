@@ -11,6 +11,6 @@ package com.mycompany.songmanagement;
 public class SongManagement {
 
     public static void main(String[] args) {
-        new Main().setVisible(true);
+        new NewMain().setVisible(true);
     }
 }

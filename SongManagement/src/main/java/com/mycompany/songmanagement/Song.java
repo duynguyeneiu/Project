@@ -5,6 +5,7 @@
 package com.mycompany.songmanagement;
 
 import java.io.*;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -13,24 +14,68 @@ import javax.swing.*;
  */
 public class Song implements Serializable {
 
-    private String name, author, singer, manufacturer, genre, album;
+     private String nameSong,artist, manufacturer, genre, album;
     private int year;
-    private ImageIcon image;
+    private String imagePath,songPath;
+    
+    
+    private ArrayList<Song> authors,singers;
 
     public Song() {
 
     }
 
-    public Song(String name, String author, String singer, String manufacturer, String genre, String album, int year) {
-        this.name = name;
-        this.author = author;
-        this.singer = singer;
+    public Song(String nameSong, String artist, String manufacturer, String genre, String album, int year, ArrayList<Song> authors, ArrayList<Song> singers) {
+        this.nameSong = nameSong;
+        this.artist = artist;
         this.manufacturer = manufacturer;
         this.genre = genre;
         this.album = album;
         this.year = year;
-
+        this.authors = authors;
+        this.singers = singers;
     }
+
+    public String getNameSong() {
+        return nameSong;
+    }
+
+    public void setNameSong(String nameSong) {
+        this.nameSong = nameSong;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public ArrayList<Song> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(ArrayList<Song> authors) {
+        this.authors = authors;
+    }
+
+    public ArrayList<Song> getSingers() {
+        return singers;
+    }
+
+    public void setSingers(ArrayList<Song> singers) {
+        this.singers = singers;
+    }
+    
 
     public String getManufacturer() {
         return manufacturer;
@@ -56,44 +101,22 @@ public class Song implements Serializable {
         this.genre = genre;
     }
 
-    public ImageIcon getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(ImageIcon image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getSongPath() {
+        return songPath;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setSongPath(String songPath) {
+        this.songPath = songPath;
     }
 
-    public String getSinger() {
-        return singer;
-    }
-
-    public void setSinger(String singer) {
-        this.singer = singer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
+   
 
 }
