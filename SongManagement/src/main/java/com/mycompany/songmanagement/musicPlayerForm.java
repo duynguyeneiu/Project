@@ -4,17 +4,36 @@
  */
 package com.mycompany.songmanagement;
 
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author LAPTOPVTC.VN
  */
 public class musicPlayerForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form musicPlayer
-     */
-    public musicPlayerForm() {
+    private ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/cd.png"));
+    static musicPlayer player = musicPlayer.getInstance();
+    static String filePath;
+    static long clipTimePosition;
+    static boolean isPlaying = true;
+    static boolean isLooping = false;
+    private ImageIcon imageIcon = new javax.swing.ImageIcon(getClass().getResource("/Icons/musicDefaultIcon.png"));
+
+    public musicPlayerForm(Song song) {
         initComponents();
+        setIconImage(icon.getImage());
+        player.loadMusic(song.getSongPath());
+        songName.setText(song.getNameSong());
+        if (song.getImagePath() == null) {
+            image.setIcon(imageIcon);
+        } else {
+            image.setIcon(new ImageIcon(song.getImagePath()));
+        }
+        player.clip.setMicrosecondPosition(0);
+        clipTimePosition = 0;
+        player.clip.start();
     }
 
     /**
@@ -25,28 +44,139 @@ public class musicPlayerForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        songName = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        playButton = new javax.swing.JButton();
+        pauseButton = new javax.swing.JButton();
+        loopButton = new javax.swing.JButton();
+        image = new javax.swing.JLabel();
+
         setTitle("Music Player");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        songName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        songName.setForeground(new java.awt.Color(51, 51, 255));
+        songName.setText("jLabel1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        getContentPane().add(songName, gridBagConstraints);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/play.png"))); // NOI18N
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(6, 5, 6, 5);
+        jPanel2.add(playButton, gridBagConstraints);
+
+        pauseButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pauseButton.setText("Pause");
+        pauseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pauseButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 10);
+        jPanel2.add(pauseButton, gridBagConstraints);
+
+        loopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loop.png"))); // NOI18N
+        loopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loopButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 20);
+        jPanel2.add(loopButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        getContentPane().add(jPanel2, gridBagConstraints);
+
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        image.setToolTipText("");
+        image.setMaximumSize(new java.awt.Dimension(350, 250));
+        image.setMinimumSize(new java.awt.Dimension(350, 250));
+        image.setName(""); // NOI18N
+        image.setPreferredSize(new java.awt.Dimension(350, 250));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(image, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        player.clip.setMicrosecondPosition(0);
+        clipTimePosition = 0;
+        player.clip.start();
+    }//GEN-LAST:event_playButtonActionPerformed
+
+    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
+        if (isPlaying) {
+            clipTimePosition = player.clip.getMicrosecondPosition();
+            player.clip.stop();
+            pauseButton.setText("Resume");
+
+        } else {
+            player.clip.setMicrosecondPosition(clipTimePosition);
+            player.clip.start();
+            pauseButton.setText("Pause");
+        }
+        isPlaying = !isPlaying;
+    }//GEN-LAST:event_pauseButtonActionPerformed
+
+    private void loopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loopButtonActionPerformed
+        if (isLooping) {
+            player.clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } else {
+            player.clip.loop(0);
+        }
+        isLooping = !isLooping;
+    }//GEN-LAST:event_loopButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        player.clip.stop();
+
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel image;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton loopButton;
+    private javax.swing.JButton pauseButton;
+    private javax.swing.JButton playButton;
+    private javax.swing.JLabel songName;
     // End of variables declaration//GEN-END:variables
+
 }

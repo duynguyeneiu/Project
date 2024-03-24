@@ -11,29 +11,55 @@ import java.io.*;
  *
  * @author LAPTOPVTC.VN
  */
-public class Artist {
-    private String name, imagePath;
-    private int follower;
+public class Artist implements Serializable{
+
+    private String name, agency, gender, nationality, imagePath;
+    private int follower, yearOfBirth;
     private ArrayList<String> albums;
-    
 
     public Artist() {
+        this.follower = 15000000;
+        
     }
 
-    public Artist(String artistName, int follower, ArrayList<String> albums) {
-        this.name = artistName;
-        this.imagePath = "/Icons/defaultArtistIcon.png";
-        this.follower = follower;
-        this.albums = albums;
+    public String getNationality() {
+        return nationality;
     }
-    
 
-    public String getname() {
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setname(String artistName) {
-        this.name = artistName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAgency() {
+        return agency;
+    }
+
+    public void setAgency(String agency) {
+        this.agency = agency;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
     public String getImagePath() {
@@ -52,13 +78,20 @@ public class Artist {
         this.follower = follower;
     }
 
-    public ArrayList<Album> getAlbums() {
+    public ArrayList<String> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
+    public int getAlbumsSize() {
+        if (albums == null) {
+            return 0;
+        }
+        return albums.size();
+
+    }
+
+    public void setAlbums(ArrayList<String> albums) {
         this.albums = albums;
     }
 
-   
 }

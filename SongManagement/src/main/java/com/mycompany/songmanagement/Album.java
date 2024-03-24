@@ -12,17 +12,50 @@ import java.util.*;
  */
 public class Album {
 
-    private String albumName;
+    private String albumName, imagePath, genre;
+    private int yearOfRelease;
     private ArrayList<String> songList;
     private String artist;
 
     public Album() {
+
     }
 
     public Album(String albumName, ArrayList<String> songList, String artist) {
         this.albumName = albumName;
         this.songList = songList;
         this.artist = artist;
+    }
+
+    public int getSongsSize() {
+        if (songList == null) {
+            return 0;
+        }
+        return songList.size();
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getYearOfRelease() {
+        return yearOfRelease;
+    }
+
+    public void setYearOfRelease(int yearOfRelease) {
+        this.yearOfRelease = yearOfRelease;
     }
 
     public String getAlbumName() {
@@ -48,6 +81,5 @@ public class Album {
     public void setArtist(String artist) {
         this.artist = artist;
     }
-    
-    
+
 }

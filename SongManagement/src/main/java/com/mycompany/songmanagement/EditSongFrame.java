@@ -6,7 +6,10 @@ package com.mycompany.songmanagement;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -26,12 +29,11 @@ public class EditSongFrame extends javax.swing.JFrame {
     private ArrayList<Artist> artists;
     private ArrayList<Album> albums;
     private ArrayList<Song> list;
-    private int index;
+    
     private Song song;
 
     public EditSongFrame(ArrayList<Song> list, int index, ArrayList<Artist> artists, ArrayList<Album> albums) {
         this.list = list;
-        this.index = index;
         this.artists = artists;
         this.albums = albums;
         initComponents();
@@ -428,6 +430,7 @@ public class EditSongFrame extends javax.swing.JFrame {
             song.setManufacturer(manufacturerText.getText());
             song.setYear(Integer.parseInt(yearText.getText()));
             song.setGenre(genres.getSelectedItem().toString());
+            saveFile();
             JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
             dispose();
         }
@@ -459,10 +462,22 @@ public class EditSongFrame extends javax.swing.JFrame {
 
     private void setComboBox() {
         for (Artist art : artists) {
-            artistBox.addItem(art.getname());
+            artistBox.addItem(art.getName());
         }
         for (Album alb : albums) {
             artistBox.addItem(alb.getAlbumName());
+        }
+    }
+    private void saveFile() {
+        String fileName = "SongList.data";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(list);
+            oos.close();
+           
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
         }
     }
 

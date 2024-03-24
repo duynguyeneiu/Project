@@ -34,7 +34,7 @@ public class Main extends javax.swing.JFrame {
 //        ImageIcon icon = new ImageIcon(iconUrl);
 //        setIconImage(icon.getImage());
         setLocationRelativeTo(null);
-        addRowSorter();
+        addRowSorter(table);
       //  fillTable(list);
 
     }
@@ -670,7 +670,7 @@ public class Main extends javax.swing.JFrame {
 //
 //    }
 
-    private void addRowSorter() {
+    private void addRowSorter(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         table.setRowSorter(sorter);
