@@ -4,13 +4,14 @@
  */
 package com.mycompany.songmanagement;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author LAPTOPVTC.VN
  */
-public class Album {
+public class Album implements Serializable {
 
     private String albumName, imagePath, genre;
     private int yearOfRelease;
@@ -18,7 +19,7 @@ public class Album {
     private String artist;
 
     public Album() {
-
+        songList = new ArrayList<>();
     }
 
     public Album(String albumName, ArrayList<String> songList, String artist) {

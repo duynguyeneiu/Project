@@ -40,6 +40,10 @@ public class AddNewSong extends javax.swing.JFrame {
         this.albums = albums;
         this.song = new Song();
         initComponents();
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
+        setAlbumBox();
+        setArtistBox();
     }
 
     @SuppressWarnings("unchecked")
@@ -281,6 +285,11 @@ public class AddNewSong extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addSinger.png"))); // NOI18N
         jButton1.setText("New Artist");
         jButton1.setPreferredSize(new java.awt.Dimension(117, 22));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 8;
@@ -290,6 +299,11 @@ public class AddNewSong extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addAlbum.png"))); // NOI18N
         jButton2.setText("New Album");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 9;
@@ -297,6 +311,16 @@ public class AddNewSong extends javax.swing.JFrame {
         jPanel2.add(jButton2, gridBagConstraints);
 
         albumBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        albumBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                albumBoxMouseClicked(evt);
+            }
+        });
+        albumBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                albumBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -370,7 +394,6 @@ public class AddNewSong extends javax.swing.JFrame {
 
     private void saveSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSongButtonActionPerformed
         addSong();
-        dispose();
     }//GEN-LAST:event_saveSongButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -402,9 +425,29 @@ public class AddNewSong extends javax.swing.JFrame {
 
     private void artistBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistBoxMouseClicked
         artistBox.removeAllItems();
-        albumBox.removeAllItems();
-        setComboBox();
+        setArtistBox();
     }//GEN-LAST:event_artistBoxMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AddNewArtist addnewartist = new AddNewArtist(list, artists, albums);
+        addnewartist.setVisible(true);
+        addnewartist.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        AddNewAlbum addnewalbum = new AddNewAlbum(list, artists, albums);
+        addnewalbum.setVisible(true);
+        addnewalbum.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void albumBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_albumBoxActionPerformed
+        
+    }//GEN-LAST:event_albumBoxActionPerformed
+
+    private void albumBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_albumBoxMouseClicked
+        albumBox.removeAllItems();
+        setAlbumBox();
+    }//GEN-LAST:event_albumBoxMouseClicked
 
     private void addSong() {
         ImageIcon crossIcon = new ImageIcon(getClass().getResource("/Icons/cross mark.png"));
@@ -443,9 +486,15 @@ public class AddNewSong extends javax.swing.JFrame {
             song.setYear(Integer.parseInt(yearText.getText()));
             song.setGenre(genres.getSelectedItem().toString());
             list.add(song);
-            saveFile();
-            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            for (Album album : albums) {
+                if (album.getAlbumName().equals(albumBox.getSelectedItem().toString())) {
+                    album.getSongList().add(song.getNameSong());
+                }
+            }
 
+            saveFile();
+            JOptionPane.showMessageDialog(this, "Successfully added a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            dispose();
         }
     }
 
@@ -471,18 +520,24 @@ public class AddNewSong extends javax.swing.JFrame {
             return false;
         }
     }
+
     private void setBorderColor(JTextField text, Color color) {
         Border bor = BorderFactory.createLineBorder(color);
         text.setBorder(bor);
     }
 
-    private void setComboBox() {
+    private void setArtistBox() {
         for (Artist art : artists) {
             artistBox.addItem(art.getName());
         }
+        artistBox.addItem("None");
+    }
+
+    private void setAlbumBox() {
         for (Album alb : albums) {
             albumBox.addItem(alb.getAlbumName());
         }
+        albumBox.addItem("None");
     }
 
     private void saveFile() {
@@ -490,7 +545,7 @@ public class AddNewSong extends javax.swing.JFrame {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(list);
             oos.close();
-           
+
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
         } catch (IOException ex) {

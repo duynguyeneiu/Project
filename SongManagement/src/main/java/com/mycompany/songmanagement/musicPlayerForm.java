@@ -100,7 +100,9 @@ public class musicPlayerForm extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 10);
         jPanel2.add(pauseButton, gridBagConstraints);
 
+        loopButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         loopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loop.png"))); // NOI18N
+        loopButton.setText("Loop");
         loopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loopButtonActionPerformed(evt);
@@ -158,8 +160,10 @@ public class musicPlayerForm extends javax.swing.JFrame {
     private void loopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loopButtonActionPerformed
         if (isLooping) {
             player.clip.loop(Clip.LOOP_CONTINUOUSLY);
+            loopButton.setText("Stop Looping");
         } else {
             player.clip.loop(0);
+            loopButton.setText("Loop");
         }
         isLooping = !isLooping;
     }//GEN-LAST:event_loopButtonActionPerformed

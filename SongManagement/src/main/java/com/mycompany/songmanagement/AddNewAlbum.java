@@ -5,6 +5,10 @@
 package com.mycompany.songmanagement;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,16 +28,19 @@ public class AddNewAlbum extends javax.swing.JFrame {
     private ArrayList<Album> albums;
     private ArrayList<Song> list;
     private Album album;
+
     public AddNewAlbum(ArrayList<Song> list, ArrayList<Artist> artists, ArrayList<Album> albums) {
         this.list = list;
         this.artists = artists;
         this.albums = albums;
         this.album = new Album();
         initComponents();
-        
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
+        setComboBox();
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,10 +60,11 @@ public class AddNewAlbum extends javax.swing.JFrame {
         manufacturerLabel = new javax.swing.JLabel();
         genreBox = new javax.swing.JComboBox<>();
         artistBox = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        newArtistButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create New Album");
+        setPreferredSize(new java.awt.Dimension(424, 488));
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -239,15 +247,20 @@ public class AddNewAlbum extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 3, 7, 3);
         jPanel2.add(artistBox, gridBagConstraints);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addSinger.png"))); // NOI18N
-        jButton1.setText("New Artist");
-        jButton1.setPreferredSize(new java.awt.Dimension(117, 22));
+        newArtistButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        newArtistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addSinger.png"))); // NOI18N
+        newArtistButton.setText("New Artist");
+        newArtistButton.setPreferredSize(new java.awt.Dimension(117, 22));
+        newArtistButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newArtistButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 10);
-        jPanel2.add(jButton1, gridBagConstraints);
+        jPanel2.add(newArtistButton, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -269,8 +282,9 @@ public class AddNewAlbum extends javax.swing.JFrame {
     }//GEN-LAST:event_uploadImageButtonActionPerformed
 
     private void saveSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSongButtonActionPerformed
-        addArtist();
-        dispose();
+        addAlbum();
+        saveAlbumFile();
+
     }//GEN-LAST:event_saveSongButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -290,7 +304,13 @@ public class AddNewAlbum extends javax.swing.JFrame {
         setComboBox();
     }//GEN-LAST:event_artistBoxMouseClicked
 
-    private void addArtist() {
+    private void newArtistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newArtistButtonActionPerformed
+        AddNewArtist addnewartist = new AddNewArtist(list, artists, albums);
+        addnewartist.setVisible(true);
+        addnewartist.setLocationRelativeTo(this);
+    }//GEN-LAST:event_newArtistButtonActionPerformed
+
+    private void addAlbum() {
         ImageIcon aceptIcon = new ImageIcon(getClass().getResource("/Icons/accept mark.png"));
         ImageIcon exclamationIcon = new ImageIcon(getClass().getResource("/Icons/exclamation mark.png"));
         if (nameText.getText().isEmpty()) {
@@ -307,11 +327,18 @@ public class AddNewAlbum extends javax.swing.JFrame {
             yearText.requestFocus();
         } else {
             album.setAlbumName(nameText.getText());
-            album.setYearOfRelease(Integer.parseInt(yearText.getText()));           
+            album.setYearOfRelease(Integer.parseInt(yearText.getText()));
             album.setGenre(genreBox.getSelectedItem().toString());
             album.setArtist(artistBox.getSelectedItem().toString());
             albums.add(album);
+            for (Artist artist : artists) {
+                if (artist.getName().equals(artistBox.getSelectedItem().toString())) {
+                    artist.getAlbums().add(album.getAlbumName());
+                }
+            }
+            saveArtistFile();
             JOptionPane.showMessageDialog(this, "Successfully create a new album!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            dispose();
         }
     }
 
@@ -328,13 +355,38 @@ public class AddNewAlbum extends javax.swing.JFrame {
         Border bor = BorderFactory.createLineBorder(color);
         text.setBorder(bor);
     }
-     private void setComboBox() {
+
+    private void setComboBox() {
         for (Artist art : artists) {
             artistBox.addItem(art.getName());
         }
-        
+        artistBox.addItem("None");
+
     }
 
+    private void saveArtistFile() {
+        String fileName = "ArtistList.data";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(artists);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        }
+    }
+
+    private void saveAlbumFile() {
+        String fileName = "AlbumList.data";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(albums);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> artistBox;
@@ -342,11 +394,11 @@ public class AddNewAlbum extends javax.swing.JFrame {
     private javax.swing.JPanel functions;
     private javax.swing.JComboBox<String> genreBox;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel label;
     private javax.swing.JLabel manufacturerLabel;
     private javax.swing.JTextField nameText;
+    private javax.swing.JButton newArtistButton;
     private javax.swing.JButton saveSongButton;
     private javax.swing.JLabel songLabel;
     private javax.swing.JButton uploadImageButton;

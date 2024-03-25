@@ -35,6 +35,8 @@ public class EditArtistFrame extends javax.swing.JFrame {
         this.albums = albums;
         this.artist = new Artist();
         initComponents();
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
 
         artist = artists.get(index);
         if (artist.getImagePath()==null) {
@@ -296,7 +298,7 @@ public class EditArtistFrame extends javax.swing.JFrame {
 
     private void saveSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSongButtonActionPerformed
         editArtist();
-        dispose();
+        
     }//GEN-LAST:event_saveSongButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -311,20 +313,16 @@ public class EditArtistFrame extends javax.swing.JFrame {
         ImageIcon exclamationIcon = new ImageIcon(getClass().getResource("/Icons/exclamation mark.png"));
         if (nameText.getText().isEmpty()) {
             setBorderColor(nameText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Name of the song", "Message", 1, exclamationIcon);
+            JOptionPane.showMessageDialog(this, "Please enter Name of the artist", "Message", 1, exclamationIcon);
             nameText.requestFocus();
         } else if (agencyText.getText().isEmpty()) {
             setBorderColor(agencyText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Manufacturer of the song", "Message", 1, exclamationIcon);
+            JOptionPane.showMessageDialog(this, "Please enter Management Agency of the artist", "Message", 1, exclamationIcon);
             agencyText.requestFocus();
         } else if (yearText.getText().isEmpty()) {
             setBorderColor(yearText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Release year of the song", "Message", 1, exclamationIcon);
+            JOptionPane.showMessageDialog(this, "Please enter Year of birth of the artist", "Message", 1, exclamationIcon);
             yearText.requestFocus();
-        } else if (agencyText.getText().isEmpty()) {
-            setBorderColor(agencyText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Album of the song", "Message", 1, exclamationIcon);
-            agencyText.requestFocus();
         } else if (!isNumber(yearText.getText())) {
             setBorderColor(yearText, Color.red);
             JOptionPane.showMessageDialog(this, "Invalid number: " + yearText.getText(), "Message", 1, exclamationIcon);
@@ -341,8 +339,8 @@ public class EditArtistFrame extends javax.swing.JFrame {
             artist.setAgency(agencyText.getText());
 
             saveFile(artists);
-            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
-
+            JOptionPane.showMessageDialog(this, "Successfully edited information!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+dispose();
         }
     }
 

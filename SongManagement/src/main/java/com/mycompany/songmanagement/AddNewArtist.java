@@ -35,6 +35,8 @@ public class AddNewArtist extends javax.swing.JFrame {
         this.albums = albums;
         this.artist = new Artist();
         initComponents();
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
 
     }
 
@@ -281,7 +283,7 @@ public class AddNewArtist extends javax.swing.JFrame {
 
     private void saveSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSongButtonActionPerformed
         addArtist();
-        dispose();
+
     }//GEN-LAST:event_saveSongButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -291,16 +293,16 @@ public class AddNewArtist extends javax.swing.JFrame {
     private void nationalityBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nationalityBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nationalityBoxActionPerformed
-    private void addArtist() {  
+    private void addArtist() {
         ImageIcon aceptIcon = new ImageIcon(getClass().getResource("/Icons/accept mark.png"));
         ImageIcon exclamationIcon = new ImageIcon(getClass().getResource("/Icons/exclamation mark.png"));
         if (nameText.getText().isEmpty()) {
             setBorderColor(nameText, Color.red);
             JOptionPane.showMessageDialog(this, "Please enter Name of the artist", "Message", 1, exclamationIcon);
             nameText.requestFocus();
-        }  else if (yearText.getText().isEmpty()) {
+        } else if (yearText.getText().isEmpty()) {
             setBorderColor(yearText, Color.red);
-            JOptionPane.showMessageDialog(this, "Please enter Release year of the artist", "Message", 1, exclamationIcon);
+            JOptionPane.showMessageDialog(this, "Please enter Year of birth the artist", "Message", 1, exclamationIcon);
             yearText.requestFocus();
         } else if (agencyText.getText().isEmpty()) {
             setBorderColor(agencyText, Color.red);
@@ -323,8 +325,8 @@ public class AddNewArtist extends javax.swing.JFrame {
 
             artists.add(artist);
             saveFile(artists);
-            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
-
+            JOptionPane.showMessageDialog(this, "Successfully added an artist!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            dispose();
         }
     }
 

@@ -29,7 +29,7 @@ public class EditSongFrame extends javax.swing.JFrame {
     private ArrayList<Artist> artists;
     private ArrayList<Album> albums;
     private ArrayList<Song> list;
-    
+
     private Song song;
 
     public EditSongFrame(ArrayList<Song> list, int index, ArrayList<Artist> artists, ArrayList<Album> albums) {
@@ -37,12 +37,13 @@ public class EditSongFrame extends javax.swing.JFrame {
         this.artists = artists;
         this.albums = albums;
         initComponents();
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
         setComboBox();
-        
         song = list.get(index);
         nameText.setText(song.getNameSong());
-        artistBox.setSelectedItem(song.getArtist());
-        albumBox.setSelectedItem(song.getAlbum());
+//        artistBox.setSelectedItem(song.getArtist());
+//        albumBox.setSelectedItem(song.getAlbum());
         image.setIcon(new ImageIcon(song.getImagePath()));
         manufacturerText.setText(song.getManufacturer());
         yearText.setText(String.valueOf(song.getYear()));
@@ -79,8 +80,8 @@ public class EditSongFrame extends javax.swing.JFrame {
         UploadMusicButton = new javax.swing.JButton();
         manufacturerLabel = new javax.swing.JLabel();
 
-        setTitle("Edit Information");
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setTitle("Edit Song");
+        setPreferredSize(new java.awt.Dimension(562, 572));
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -179,7 +180,7 @@ public class EditSongFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 20, 0);
@@ -256,7 +257,8 @@ public class EditSongFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 5);
         jPanel2.add(jLabel3, gridBagConstraints);
 
         genres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jazz ", "Pop", "Rock ", "Folk ", "Classical", "Country", "EDM", "Classical ", "Rap", "Dance", "Blue ", "Opera", "Hip hop ", "R&B ", "Others" }));
@@ -268,6 +270,16 @@ public class EditSongFrame extends javax.swing.JFrame {
         jPanel2.add(genres, gridBagConstraints);
 
         artistBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        artistBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                artistBoxFocusGained(evt);
+            }
+        });
+        artistBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                artistBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -280,6 +292,11 @@ public class EditSongFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addSinger.png"))); // NOI18N
         jButton1.setText("New Singer");
         jButton1.setPreferredSize(new java.awt.Dimension(117, 22));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 8;
@@ -296,6 +313,16 @@ public class EditSongFrame extends javax.swing.JFrame {
         jPanel2.add(jButton2, gridBagConstraints);
 
         albumBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        albumBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                albumBoxFocusGained(evt);
+            }
+        });
+        albumBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                albumBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -382,7 +409,7 @@ public class EditSongFrame extends javax.swing.JFrame {
     private void UploadMusicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadMusicButtonActionPerformed
         String filePath = "";
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("MP3 & WVA", "mp3", "wva");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MP3 & WVA", "mp3", "wav");
         chooser.setFileFilter(filter);
         int selectedFile = chooser.showOpenDialog(this);
         if (selectedFile == JFileChooser.APPROVE_OPTION) {
@@ -393,6 +420,33 @@ public class EditSongFrame extends javax.swing.JFrame {
 //        filePath = path.getParent().relativize(path).toString();
         song.setSongPath(filePath);
     }//GEN-LAST:event_UploadMusicButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AddNewArtist addnewartist = new AddNewArtist(list, artists, albums);
+        addnewartist.setVisible(true);
+        addnewartist.setLocationRelativeTo(this);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void artistBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artistBoxActionPerformed
+    
+    }//GEN-LAST:event_artistBoxActionPerformed
+
+    private void albumBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_albumBoxActionPerformed
+       
+    }//GEN-LAST:event_albumBoxActionPerformed
+
+    private void artistBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_artistBoxFocusGained
+       artistBox.removeAllItems();
+        albumBox.removeAllItems();
+        setComboBox();
+    }//GEN-LAST:event_artistBoxFocusGained
+
+    private void albumBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_albumBoxFocusGained
+        artistBox.removeAllItems();
+        albumBox.removeAllItems();
+        setComboBox();
+    }//GEN-LAST:event_albumBoxFocusGained
     private void editSong() {
         ImageIcon crossIcon = new ImageIcon(getClass().getResource("/Icons/cross mark.png"));
         ImageIcon aceptIcon = new ImageIcon(getClass().getResource("/Icons/accept mark.png"));
@@ -431,7 +485,7 @@ public class EditSongFrame extends javax.swing.JFrame {
             song.setYear(Integer.parseInt(yearText.getText()));
             song.setGenre(genres.getSelectedItem().toString());
             saveFile();
-            JOptionPane.showMessageDialog(this, "Successfully add a new song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            JOptionPane.showMessageDialog(this, "Successfully edited the song!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
             dispose();
         }
     }
@@ -464,24 +518,25 @@ public class EditSongFrame extends javax.swing.JFrame {
         for (Artist art : artists) {
             artistBox.addItem(art.getName());
         }
+        artistBox.addItem("None");
         for (Album alb : albums) {
-            artistBox.addItem(alb.getAlbumName());
+            albumBox.addItem(alb.getAlbumName());
         }
+        albumBox.addItem("None");
     }
+
     private void saveFile() {
         String fileName = "SongList.data";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(list);
             oos.close();
-           
+
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
         }
     }
-
-  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,10 @@
 package com.mycompany.songmanagement;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,7 +34,9 @@ public class EditAlbumFrame extends javax.swing.JFrame {
         this.albums = albums;
         this.album = albums.get(index);
         initComponents();
-        
+        ImageIcon frameIcon= new ImageIcon(getClass().getResource("/Icons/frameIcon.png"));
+        setIconImage(frameIcon.getImage());
+        setComboBox();
         if (album.getImagePath()==null) {
             image.setIcon(new ImageIcon(getClass().getResource("/Icons/artistIcon.png")));
         } else {
@@ -256,6 +262,11 @@ public class EditAlbumFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/addSinger.png"))); // NOI18N
         jButton1.setText("New Artist");
         jButton1.setPreferredSize(new java.awt.Dimension(117, 22));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 10;
@@ -282,8 +293,9 @@ public class EditAlbumFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_uploadImageButtonActionPerformed
 
     private void saveSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSongButtonActionPerformed
-        editArtist();
-        dispose();
+        editAlbum();
+        saveAlbumFile();
+       
     }//GEN-LAST:event_saveSongButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -303,7 +315,13 @@ public class EditAlbumFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_artistBoxActionPerformed
 
-   private void editArtist() {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      AddNewArtist addnewartist = new AddNewArtist(list, artists, albums);
+        addnewartist.setVisible(true);
+        addnewartist.setLocationRelativeTo(this); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+   private void editAlbum() {
         ImageIcon aceptIcon = new ImageIcon(getClass().getResource("/Icons/accept mark.png"));
         ImageIcon exclamationIcon = new ImageIcon(getClass().getResource("/Icons/exclamation mark.png"));
         if (nameText.getText().isEmpty()) {
@@ -322,8 +340,16 @@ public class EditAlbumFrame extends javax.swing.JFrame {
             album.setAlbumName(nameText.getText());
             album.setYearOfRelease(Integer.parseInt(yearText.getText()));           
             album.setGenre(genreBox.getSelectedItem().toString());
-            album.setArtist(artistBox.getSelectedItem().toString());           
-            JOptionPane.showMessageDialog(this, "Successfully edit the album!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+            album.setArtist(artistBox.getSelectedItem().toString());    
+             for (Artist artist : artists) {
+                if (artist.getName().equals(artistBox.getSelectedItem().toString())) {
+                    artist.getAlbums().add(album.getAlbumName());
+                }
+            }
+             saveAlbumFile();
+             saveArtistFile(artists);
+            JOptionPane.showMessageDialog(this, "Successfully edited information of the album!", "Message", JOptionPane.INFORMATION_MESSAGE, aceptIcon);
+         dispose();
         }
     }
 
@@ -344,7 +370,30 @@ public class EditAlbumFrame extends javax.swing.JFrame {
         for (Artist art : artists) {
             artistBox.addItem(art.getName());
         }
+        artistBox.addItem("None");
         
+    }
+      private void saveAlbumFile() {
+        String fileName = "AlbumList.data";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(albums);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        }
+    }
+       private void saveArtistFile(ArrayList<Artist> artList) {
+        String fileName = "ArtistList.data";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(artList);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error save file: " + ex.getMessage(), "Message", 1, new ImageIcon(getClass().getResource("/Icons/cross mark.png")));
+        }
     }
 
     

@@ -19,6 +19,7 @@ public class Artist implements Serializable{
 
     public Artist() {
         this.follower = 15000000;
+        albums= new ArrayList<>();
         
     }
 
